@@ -1,9 +1,9 @@
-class AlbumsController < ApplicationController
+class AlbumsController < ProtectedController
   before_action :set_album, only: [:show, :update, :destroy]
 
   # GET /albums
   def index
-    @albums = Album.all
+    @albums = current_user.albums
 
     render json: @albums
   end
@@ -14,11 +14,21 @@ class AlbumsController < ApplicationController
   end
 
   # POST /albums
+  # def create
+  #   @album = Album.new(album_params)
+  #
+  #   if @album.save
+  #     render json: @album, status: :created, location: @album
+  #   else
+  #     render json: @album.errors, status: :unprocessable_entity
+  #   end
+  # end
+
   def create
-    @album = Album.new(album_params)
+    @album = current_user.albums.build(album_params)
 
     if @album.save
-      render json: @album, status: :created, location: @album
+      render json: @album, status: :created
     else
       render json: @album.errors, status: :unprocessable_entity
     end
@@ -41,7 +51,7 @@ class AlbumsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
-      @album = Album.find(params[:id])
+      @album = current_user.albums.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
