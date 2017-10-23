@@ -2,7 +2,7 @@
 
 # About The App
 
-It's a simple yet well known problem for music enthusiasts, especially record collectors - what is the best way for me to keep track of my collection? My Record Collector seeks to resolve that issue and provide the user with the opportunity to represent their record collection in a digital space. Whether the format is tape, vinyl, or CD, My Record Collector allows a user to document the records in their collection, and the ability to edit, delete or add new records to it. The catalog number field is especially useful for users who may look to trade or sell online or just evaluate the worth of certain pieces of their collection. The app is also responsive, meaning you can sign in from the record store and update your collection as soon as you've completed a transaction. So sign up, sign in and start collecting!
+It's a simple yet well known problem for music enthusiasts, especially record collectors - what is the best way for me to keep track of my collection? My Record Collector seeks to resolve that issue and provide the user with the opportunity to represent their record collection in a digital space. Whether the format is tape, vinyl, or CD, My Record Collector allows a user to document the records in their collection, and the ability to edit, delete or add new records to it. The catalog number field is especially useful for users who may look to trade or sell online or just evaluate the worth of certain pieces of their collection. The app is also responsive, meaning you can sign in from the record store and update your collection as soon as you've completed a transaction. So sign up, sign in and start collecting! This is the repo for the back end of the My Record Collector app.
 
 
 ## Technologies Used
@@ -42,33 +42,11 @@ The user has a one to many relationship with the albums resource, meaning that o
 
 The last piece I added to the backend was some stipulations on the albums controller to ensure that it both required authentication before being accessible and that actions only updated the currently signed in users information. To do this, I set the albums controller to inherit from the ProtectedController class, which requires authentication before actions can take place. I also updated the index and create methods that were created upon the bin/rails generate scaffold command as well as the set_album method, which is called before the show, update, and destroy methods, method chaining current_user before setting the album and albums instance variables. This ensures that all CRUD actions on the albums resource will be associated to the currently signed in user.
 
-## Wireframes and User Stories
+## ERD
 
-Wireframes - <br>
-https://imgur.com/fKPuEjh <br>
-https://imgur.com/amk7tU7 <br>
-https://imgur.com/X6sTLPD
+ERD -
+https://imgur.com/AL6fyWg
 
-User Stories -
-
-1. As a user I want to be able to sign up to My Record Collector so that I can being cataloguing my record collection
-2. As a user I want to be able to enter in my email address and password so that I can sign up to My Record Collector
-3. As a user I want to be able to have my credentials authenticated so that I can become a registered user of My Record Collector
-4. As a registered user, I want to be able to enter in the email and password I signed up with so that I can sign in to My Record Collector
-5. As a signed in user, I want to be able to sign out of My Record Collector
-6. As a signed in user, I want to be able to change/update my password
-7. As a user, I want to be able to add new records to my collection
-8. As a user, I want to be able to add the album title of a record in my collection
-9. As a user, I want to be able to add the artist name of a record in my collection
-10. As a user, I want to be able to add the year released of a record in my collection
-11. As a user, I want to be able to add the genre of a record in my collection
-12. As a user, I want to be able to add the format of a record in my collection
-13. As a user, I want to be able to add the serial number of a record in my collection
-14. As a user, I want to be able to view my record collection
-15. As a user, I want to be able to quickly see how many records I have in my collection
-16. As a user, I want to be able to see albums by an artist in my collection **** (not MVP)
-17. As a user, I want to be able to remove an album from my collection
-18. As a user, I want to be able to access My Record Collector from my phone so that I can update my collection in real time.
 
 ## Future Iterations
 
