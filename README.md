@@ -42,6 +42,25 @@ The user has a one to many relationship with the albums resource, meaning that o
 
 The last piece I added to the backend was some stipulations on the albums controller to ensure that it both required authentication before being accessible and that actions only updated the currently signed in users information. To do this, I set the albums controller to inherit from the ProtectedController class, which requires authentication before actions can take place. I also updated the index and create methods that were created upon the bin/rails generate scaffold command as well as the set_album method, which is called before the show, update, and destroy methods, method chaining current_user before setting the album and albums instance variables. This ensures that all CRUD actions on the albums resource will be associated to the currently signed in user.
 
+## User Actions
+
+| Verb   | URI Pattern                   | Controller#Action    |
+|--------|-------------------------------|----------------------|
+| POST   | `/sign-up`                    |    `users#signup`    |
+| POST   | `/sign-in `                   |    `users#signIn`    |
+| PATCH  | `/change-password/:id `       |  `users#changepw`    |
+| DELETE | `/sign-out/:id `              |   `users#signout`    |
+
+## Album Actions
+
+| Verb   | URI Pattern                   | Controller#Action    |
+|--------|-------------------------------|----------------------|
+| GET    | `/albums`                     |    `albums#index`    |
+| GET    | `/albums/:id `                |    `albums#show`     |
+| PATCH  | `/albums/:id `                |  `albums#update`     |
+| DELETE | `/albums/:id `                |   `albums#destroy`   |
+| POST   | `/albums `                    |   `albums#create`    | 
+
 ## ERD
 
 ERD -
