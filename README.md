@@ -2,19 +2,13 @@
 
 # About The App
 
-It's a simple yet well known problem for music enthusiasts, especially record collectors - what is the best way for me to keep track of my collection? My Record Collector seeks to resolve that issue and provide the user with the opportunity to represent their record collection in a digital space. Whether the format is tape, vinyl, or CD, My Record Collector allows a user to document the records in their collection, and the ability to edit, delete or add new records to it. The catalog number field is especially useful for users who may look to trade or sell online or just evaluate the worth of certain pieces of their collection. The app is also responsive, meaning you can sign in from the record store and update your collection as soon as you've completed a transaction. So sign up, sign in and start collecting! This is the repo for the back end of the My Record Collector app.
+It's a simple yet well known problem for music enthusiasts, especially record collectors - what is the best way for me to keep track of my collection? My Record Collector seeks to resolve that issue and provide the user with the opportunity to represent their record collection in a digital space. Whether the format is tape, vinyl, or CD, My Record Collector allows a user to document the records in their collection, and the ability to edit, delete or add new records to it. The catalog number field is especially useful for users who may look to trade or sell online or just evaluate the worth of certain pieces of their collection. When adding and editing a record, the Artist Name, Album Name, Year Released and Format fields are required. The catalog number is optional. The app is also responsive, meaning you can sign in from the record store and update your collection as soon as you've completed a transaction. So sign up, sign in and start collecting! This is the repo for the back end of the My Record Collector app.
 
 
 ## Technologies Used
 
-1. HTML5
-2. CSS3
-3. JavaScript
-4. jQuery/DOM manipulation
-5. ajax requests to an api
-6. Bootstrap
-7. Handlebars
-8. Ruby on Rails
+1. Ruby on Rails
+2. Heroku
 
 ## Planning Phase
 
@@ -40,6 +34,8 @@ A user can trigger these actions on the front end by the 'View My Albums' button
 
 The user has a one to many relationship with the albums resource, meaning that one user can have many albums. Once I was able to confirm ability to CRUD on the album resource, I created the relationship between the resources by generating a migration file, using the command: bin/rails generate migration AddUserToAlbums user:references. This in essence generated a foreign key for user_id on the albums table thus creating the one to many relationship. After this was completed and I ran the command to migrate the file that was generated from the last command, I updated the User model and Album model to indicate that a user has_many albums and an album belongs_to a user. I also added the user_id to the Album serializer to test that this one to many relationship did indeed exist.
 
+The albums table has the following columns, all of which accept string values - Artist Name, Album Title, Year Released, Format, and Catalog Number. All of these fields are required on the front end validated for presence is true on the back end, except for Catalog Number. There is also an album id as well as a foreign key for user id on the Albums table.
+
 The last piece I added to the backend was some stipulations on the albums controller to ensure that it both required authentication before being accessible and that actions only updated the currently signed in users information. To do this, I set the albums controller to inherit from the ProtectedController class, which requires authentication before actions can take place. I also updated the index and create methods that were created upon the bin/rails generate scaffold command as well as the set_album method, which is called before the show, update, and destroy methods, method chaining current_user before setting the album and albums instance variables. This ensures that all CRUD actions on the albums resource will be associated to the currently signed in user.
 
 ## User Actions
@@ -59,7 +55,7 @@ The last piece I added to the backend was some stipulations on the albums contro
 | GET    | `/albums/:id `                |    `albums#show`     |
 | PATCH  | `/albums/:id `                |  `albums#update`     |
 | DELETE | `/albums/:id `                |   `albums#destroy`   |
-| POST   | `/albums `                    |   `albums#create`    | 
+| POST   | `/albums `                    |   `albums#create`    |
 
 ## ERD
 
