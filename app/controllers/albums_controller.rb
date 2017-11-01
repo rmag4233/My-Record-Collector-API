@@ -57,6 +57,6 @@ class AlbumsController < ProtectedController
 
   # Only allow a trusted parameter "white list" through.
   def album_params
-    params.require(:album).permit(:title, :artist_name, :year_released, :format, :catalog_number)
+    params.require(:album).permit(:title, :artist_name, :year_released, :format, :cover, :catalog_number)
   end
 end
